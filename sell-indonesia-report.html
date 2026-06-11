@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sell Indonesia — Laporan Mendalam</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --ink:       #0F0F0F;
+    --paper:     #F8F5EF;
+    --accent:    #C0392B;
+    --accent-dim:#8B2019;
+    --mid:       #5A5A5A;
+    --rule:      #D4CFC6;
+    --highlight: #FFF3CD;
+    --green:     #1A6B3C;
+    --col-gap:   clamp(1.5rem, 4vw, 3rem);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(14px, 1.6vw, 16px);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── MASTHEAD ─── */
+  .masthead {
+    border-bottom: 3px solid var(--ink);
+    padding: 1.5rem 2rem 0;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: .5rem;
+    margin-bottom: .75rem;
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+  .masthead-kicker {
+    font-family: 'Inter', sans-serif;
+    font-size: .78rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: .4rem;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -.02em;
+    color: var(--ink);
+  }
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .masthead-deck {
+    font-size: clamp(.95rem, 1.8vw, 1.1rem);
+    color: var(--mid);
+    max-width: 640px;
+    margin-top: .8rem;
+    line-height: 1.55;
+    font-weight: 300;
+  }
+  .masthead-meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    padding-top: .75rem;
+    border-top: 1px solid var(--rule);
+    font-size: .75rem;
+    color: var(--mid);
+    letter-spacing: .04em;
+    padding-bottom: 1.25rem;
+  }
+  .masthead-meta span { font-weight: 600; color: var(--ink); }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 2rem;
+  }
+
+  /* ─── STAT BAR ─── */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0;
+    border: 1.5px solid var(--ink);
+    margin-bottom: 2.5rem;
+  }
+  .stat-item {
+    padding: 1rem 1.25rem;
+    border-right: 1.5px solid var(--ink);
+    position: relative;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-label {
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    font-weight: 600;
+    display: block;
+    margin-bottom: .2rem;
+  }
+  .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--accent);
+  }
+  .stat-sub {
+    font-size: .72rem;
+    color: var(--mid);
+    margin-top: .15rem;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section {
+    margin-bottom: 3rem;
+  }
+  .section-label {
+    font-size: .68rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    border-top: 2px solid var(--accent);
+    display: inline-block;
+    padding-top: .35rem;
+    margin-bottom: 1rem;
+  }
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .section p {
+    margin-bottom: 1rem;
+    color: #2a2a2a;
+  }
+  .section p:last-child { margin-bottom: 0; }
+
+  /* ─── TWO-COLUMN GRID ─── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--col-gap);
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .masthead { padding: 1.2rem 1.2rem 0; }
+    .container { padding: 1.5rem 1.2rem; }
+    .stat-bar { grid-template-columns: 1fr 1fr; }
+    .stat-item { border-right: 1.5px solid var(--ink); }
+    .stat-item:nth-child(2n) { border-right: none; }
+    .stat-item:nth-child(n+3) { border-top: 1.5px solid var(--ink); }
+  }
+
+  /* ─── PULLQUOTE ─── */
+  .pullquote {
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: #fff;
+  }
+  .pullquote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ink);
+    margin-bottom: .4rem !important;
+  }
+  .pullquote cite {
+    font-size: .75rem;
+    color: var(--mid);
+    font-style: normal;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ─── CAUSE CARDS ─── */
+  .cause-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--ink);
+    border: 1.5px solid var(--ink);
+    margin: 1.5rem 0 2rem;
+  }
+  .cause-card {
+    background: var(--paper);
+    padding: 1.25rem;
+  }
+  .cause-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .7rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: .06em;
+    margin-bottom: .4rem;
+  }
+  .cause-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: .4rem;
+    line-height: 1.25;
+  }
+  .cause-desc {
+    font-size: .82rem;
+    color: var(--mid);
+    line-height: 1.55;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline {
+    border-left: 2px solid var(--rule);
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.6rem;
+    top: .35rem;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--paper);
+    outline: 2px solid var(--accent);
+  }
+  .timeline-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: .06em;
+    margin-bottom: .2rem;
+  }
+  .timeline-title {
+    font-weight: 600;
+    font-size: .95rem;
+    margin-bottom: .25rem;
+  }
+  .timeline-body {
+    font-size: .85rem;
+    color: var(--mid);
+    line-height: 1.55;
+  }
+
+  /* ─── IMPACT TABLE ─── */
+  .impact-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .85rem;
+    margin: 1.5rem 0;
+  }
+  .impact-table th {
+    text-align: left;
+    padding: .6rem .75rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .impact-table td {
+    padding: .6rem .75rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .impact-table tr:last-child td { border-bottom: none; }
+  .impact-table tr:nth-child(even) td { background: #fff; }
+  .badge-neg {
+    display: inline-block;
+    background: #FDECEA;
+    color: var(--accent);
+    font-size: .68rem;
+    font-weight: 700;
+    padding: .1rem .4rem;
+    border-radius: 2px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .badge-pos {
+    display: inline-block;
+    background: #E8F5E9;
+    color: var(--green);
+    font-size: .68rem;
+    font-weight: 700;
+    padding: .1rem .4rem;
+    border-radius: 2px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .badge-neu {
+    display: inline-block;
+    background: #EEF;
+    color: #334;
+    font-size: .68rem;
+    font-weight: 700;
+    padding: .1rem .4rem;
+    border-radius: 2px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  /* ─── CHAIN DIAGRAM ─── */
+  .chain {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 1.5rem 0;
+  }
+  .chain-row {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+  .chain-box {
+    padding: .55rem .9rem;
+    font-size: .82rem;
+    font-weight: 500;
+    border: 1.5px solid var(--ink);
+    background: #fff;
+    min-width: 180px;
+    flex: 1;
+    line-height: 1.3;
+  }
+  .chain-box.cause { border-color: var(--accent); background: #FFF0EE; }
+  .chain-box.effect { border-color: var(--ink); }
+  .chain-box.warning { border-color: #E67E22; background: #FFF8EE; }
+  .chain-arrow {
+    font-size: 1.1rem;
+    color: var(--mid);
+    flex-shrink: 0;
+    align-self: center;
+    margin: .2rem 0;
+  }
+  .chain-sub {
+    font-size: .7rem;
+    color: var(--mid);
+    margin-top: .15rem;
+  }
+
+  /* ─── OUTLOOK BOX ─── */
+  .outlook-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  @media (max-width: 600px) { .outlook-grid { grid-template-columns: 1fr; } }
+  .outlook-box {
+    padding: 1.2rem;
+    border: 1.5px solid var(--rule);
+  }
+  .outlook-box.bull { border-color: var(--green); }
+  .outlook-box.bear { border-color: var(--accent); }
+  .outlook-header {
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: .75rem;
+  }
+  .outlook-header.bull { color: var(--green); }
+  .outlook-header.bear { color: var(--accent); }
+  .outlook-item {
+    font-size: .84rem;
+    color: #2a2a2a;
+    margin-bottom: .5rem;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.45;
+  }
+  .outlook-item::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    font-size: .75rem;
+  }
+  .bull .outlook-item::before { color: var(--green); }
+  .bear .outlook-item::before { color: var(--accent); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    border-top: 2px solid var(--ink);
+    padding: 1.25rem 2rem;
+    max-width: 960px;
+    margin: 0 auto 2rem;
+    font-size: .75rem;
+    color: var(--mid);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 2.5rem 0;
+  }
+
+  /* ─── INLINE HIGHLIGHT ─── */
+  mark {
+    background: var(--highlight);
+    padding: 0 .2em;
+    border-radius: 2px;
+  }
+
+  /* ─── MONO DATA ─── */
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .88em;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-top">
+    <span>Laporan Pasar Modal &amp; Kebijakan Ekonomi</span>
+    <span>11 Juni 2026</span>
+  </div>
+  <p class="masthead-kicker">Analisis Mendalam</p>
+  <h1>Narasi <em>"Sell Indonesia"</em></h1>
+  <p class="masthead-deck">
+    Bagaimana krisis kepercayaan investor global terbentuk, apa yang mendorongnya, dan ke mana Indonesia harus bergerak dari titik ini.
+  </p>
+  <div class="masthead-meta">
+    <div>Sumber <span>Bloomberg, Kompas, Reuters, ANTARA, BEI, OJK</span></div>
+    <div>Status IHSG YTD <span style="color:var(--accent)">−39% (8 Juni 2026)</span></div>
+    <div>Rupiah <span style="color:var(--accent)">Rp 18.100–18.200/USD</span></div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- STAT BAR -->
+  <div class="stat-bar">
+    <div class="stat-item">
+      <span class="stat-label">IHSG YTD (2026)</span>
+      <div class="stat-value">−39%</div>
+      <div class="stat-sub">Terburuk dari 90+ indeks global (Bloomberg)</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Net Sell Asing (Saham)</span>
+      <div class="stat-value">Rp 61,8 T</div>
+      <div class="stat-sub">YtD per 8 Juni 2026</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Net Sell Asing (SBN)</span>
+      <div class="stat-value">Rp 15,4 T</div>
+      <div class="stat-sub">Akhir 2025 s.d. Mei 2026</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">Kurs Rupiah</span>
+      <div class="stat-value">Rp 18.2rb</div>
+      <div class="stat-sub">Rekor terlemah sepanjang sejarah</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-label">BI Rate (Jun 2026)</span>
+      <div class="stat-value">5,50%</div>
+      <div class="stat-sub">Naik 50 bps (Mei) + 25 bps (9 Jun)</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: APA ITU -->
+  <section class="section">
+    <span class="section-label">Bagian I</span>
+    <h2>Apa Itu Narasi "Sell Indonesia"?</h2>
+    <p>
+      "Sell Indonesia" bukan sekadar istilah teknis perdagangan — ini adalah <strong>narasi kepercayaan yang runtuh</strong>. Frasa ini pertama kali mencuat secara massif di media internasional, khususnya Bloomberg, ketika Indonesia ditetapkan sebagai pasar saham dengan kinerja terburuk tahun 2026 di antara lebih dari 90 indeks global yang dipantau. Narasi ini merangkum keputusan kolektif investor asing untuk melikuidasi eksposur mereka terhadap aset Indonesia — baik saham, obligasi pemerintah, maupun rupiah.
+    </p>
+    <p>
+      Yang membuat fenomena ini berbeda dari koreksi biasa adalah sifatnya yang <em>selektif</em>. Investor global tidak sedang melarikan diri dari seluruh emerging markets. Mereka secara spesifik mengurangi eksposur terhadap Indonesia. Indonesia ETF (EIDO) mencatat return minus 28,6% sejak awal 2025, sementara emerging markets secara keseluruhan naik 64,6%, Vietnam naik 63,2%, dan Taiwan naik 107,2%. Ini bukan gelombang pasang global — ini adalah keputusan sadar untuk menjauhi Indonesia.
+    </p>
+
+    <div class="pullquote">
+      <p>"Pasar tidak lagi mempertanyakan kemampuan Indonesia untuk tumbuh, melainkan mempertanyakan kredibilitas Indonesia."</p>
+      <cite>— Liza Camelia Suryanata, Head of Research Kiwoom Sekuritas</cite>
+    </div>
+
+    <p>
+      Kata kunci di sini adalah <strong>kredibilitas</strong>. Investor asing yang menjual Indonesia hari ini bukan karena ekonomi tumbang — IMF masih memproyeksikan pertumbuhan ~5% sepanjang 2025–2026. Mereka menjual karena mereka tidak lagi yakin bisa mempercayai aturan mainnya.
+    </p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SECTION 2: TIMELINE KRISIS -->
+  <section class="section">
+    <span class="section-label">Bagian II</span>
+    <h2>Kronologi: Bagaimana Ini Terbentuk</h2>
+    <p>Narasi "Sell Indonesia" bukan muncul dalam semalam. Ia adalah akumulasi dari beberapa pukulan yang datang secara berurutan sepanjang 2025–2026.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">20 Jan 2026</div>
+        <div class="timeline-title">IHSG Cetak Rekor Tertinggi Sepanjang Masa</div>
+        <div class="timeline-body">IHSG menyentuh 9.134,70 — titik puncak yang kini terasa seperti garis awal dari kejatuhan paling dramatis dalam satu dekade.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">27–28 Jan 2026</div>
+        <div class="timeline-title">MSCI Bekukan Rebalancing — IHSG Anjlok 7,35% dalam Sehari</div>
+        <div class="timeline-body">MSCI menangguhkan penambahan bobot saham Indonesia karena kekhawatiran transparansi free float dan data kepemilikan KSEI. Ini memicu forced selling massif dari fund manajer pasif global. Dalam satu hari, IHSG mencatat koreksi harian terdalam.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Feb–Mar 2026</div>
+        <div class="timeline-title">Eskalasi Konflik Timur Tengah — Minyak Melonjak ke $120/bbl</div>
+        <div class="timeline-body">Penutupan jalur pelayaran Selat Hormuz selama 10+ minggu memicu risk-off global. Bagi Indonesia, ini memperparah subsidi energi yang sudah membengkak, mendorong defisit fiskal.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">31 Mar 2026</div>
+        <div class="timeline-title">Reformasi Transparansi BEI Mulai Berlaku</div>
+        <div class="timeline-body">OJK, BEI, dan KSEI menyelesaikan empat agenda reformasi: minimum free float naik ke 15%, 39 klasifikasi investor baru, dan penyesuaian metodologi indeks flagship IDX. Respons pasar: positif tapi belum cukup untuk membalikkan sentimen.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">19–20 Mei 2026</div>
+        <div class="timeline-title">BI Naikan BI Rate 50 bps ke 5,25%</div>
+        <div class="timeline-body">Bank Indonesia merespons pelemahan rupiah dan capital outflow dengan kenaikan agresif. Rupiah sempat menyentuh Rp 17.500/USD — kala itu sudah dianggap level bersejarah.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">1 Jun 2026</div>
+        <div class="timeline-title">Danantara Jadi Eksportir Tunggal Komoditas Strategis</div>
+        <div class="timeline-body">PT Danantara Sumberdaya Indonesia resmi menjadi pintu tunggal ekspor batu bara, CPO, dan ferroalloy. Pasar menginterpretasikan ini sebagai sinyal intervensi negara yang semakin dalam ke sektor swasta. Rupiah langsung merespons negatif.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">3 Jun 2026</div>
+        <div class="timeline-title">IHSG Tembus di Bawah 6.000 — Rupiah Rp 17.975</div>
+        <div class="timeline-body">IHSG ditutup di 5.941, level penutupan terendah sejak Mei 2021. Rupiah mencetak rekor terlemah baru. Narasi "Sell Indonesia" dari Bloomberg mulai ramai diperbincangkan global.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">8 Jun 2026</div>
+        <div class="timeline-title">IHSG 5.342 — Terendah Sejak November 2020</div>
+        <div class="timeline-body">Net sell asing akumulasi menyentuh Rp 61,8 triliun YtD. Dana asing yang kabur setara dengan USD 3,6 miliar. Rupiah bergerak di kisaran Rp 18.100–18.200.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">9 Jun 2026</div>
+        <div class="timeline-title">BI Kembali Naikan Bunga 25 bps ke 5,50%</div>
+        <div class="timeline-body">Dalam waktu kurang dari tiga minggu, BI menaikkan suku bunga dua kali. Langkah darurat ini menandai betapa seriusnya tekanan terhadap rupiah dan modal asing.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">18–24 Jun 2026</div>
+        <div class="timeline-title">MSCI & FTSE Review — Momen Penentu Nasib Emerging Market</div>
+        <div class="timeline-body">MSCI Global Market Accessibility Review (18 Jun), FTSE Rebalancing (22 Jun), dan MSCI Annual Market Classification Review (24 Jun) menjadi ujian kritis: apakah Indonesia bertahan di emerging market atau turun kasta ke frontier market?</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SECTION 3: SEBAB -->
+  <section class="section">
+    <span class="section-label">Bagian III</span>
+    <h2>Akar Masalah: Lima Lapisan Krisis Kepercayaan</h2>
+    <p>Para analis dan investor mengidentifikasi krisis ini sebagai multi-layer. Tidak ada satu sebab tunggal — melainkan interaksi antara faktor kebijakan domestik, sinyal pasar global, dan faktor struktural yang telah lama terakumulasi.</p>
+
+    <div class="cause-grid">
+      <div class="cause-card">
+        <div class="cause-num">01 / 05</div>
+        <div class="cause-title">Ketidakpastian Kebijakan Ekonomi</div>
+        <div class="cause-desc">Kebijakan pemerintah Prabowo dinilai mudah berubah, sukar diprediksi, dan semakin intervensionis. Dari ekspor komoditas satu pintu via Danantara, hingga rencana devisa hasil ekspor wajib disimpan di bank BUMN — investor melihat pergeseran dari prinsip pasar terbuka. Fitch menurunkan outlook Indonesia ke "Negatif" meski rating BBB dipertahankan, dengan menyebut peningkatan ketidakpastian dalam bauran kebijakan.</div>
+      </div>
+      <div class="cause-card">
+        <div class="cause-num">02 / 05</div>
+        <div class="cause-title">Krisis Transparansi Pasar Modal (MSCI Issue)</div>
+        <div class="cause-desc">MSCI membekukan rebalancing karena metodologi free float Indonesia dianggap tidak andal. Data kepemilikan KSEI dinilai belum cukup konsisten untuk mendukung penilaian investasi. Ancaman downgrade dari emerging market ke frontier market — jika terjadi — diperkirakan akan memaksa fund manajer pasif global melikuidasi USD 2,2–50 miliar aset Indonesia.</div>
+      </div>
+      <div class="cause-card">
+        <div class="cause-num">03 / 05</div>
+        <div class="cause-title">Pelemahan Rupiah & Spiral Makroekonomi</div>
+        <div class="cause-desc">Rupiah menembus Rp 18.000/USD — rekor terlemah sepanjang sejarah. Pelemahan ini memperburuk subsidi energi (naik 266,5% YoY menjadi Rp 118,7 triliun), meningkatkan biaya utang luar negeri korporasi, dan membangun ekspektasi inflasi. BI membutuhkan kenaikan bunga agresif yang berisiko menghambat pertumbuhan kredit.</div>
+      </div>
+      <div class="cause-card">
+        <div class="cause-num">04 / 05</div>
+        <div class="cause-title">Penyusutan Kelas Menengah</div>
+        <div class="cause-desc">Kelas menengah Indonesia — motor konsumsi domestik — menyusut dari 61,5 juta orang (2018) menjadi hanya 46,6 juta (2025). Ini melemahkan fundamen permintaan domestik dan mengurangi daya tahan ekonomi terhadap guncangan eksternal. Investor melihat ini sebagai tanda bahwa "story konsumsi Indonesia" semakin rapuh.</div>
+      </div>
+      <div class="cause-card">
+        <div class="cause-num">05 / 05</div>
+        <div class="cause-title">Faktor Geopolitik Global: Konflik Timur Tengah</div>
+        <div class="cause-desc">Meski bersifat eksternal, eskalasi konflik di Timur Tengah dan penutupan Selat Hormuz mempercepat capital flight dari seluruh aset berisiko di pasar berkembang. Indonesia, sebagai importir energi bersih, merasakan dampak ganda: harga minyak tinggi menekan fiskal sekaligus memperparah defisit transaksi berjalan.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SECTION 4: RANTAI DAMPAK -->
+  <section class="section">
+    <span class="section-label">Bagian IV</span>
+    <h2>Rantai Dampak: Dari Sentimen ke Krisis Nyata</h2>
+    <p>Narasi "Sell Indonesia" bukan hanya masalah pasar modal yang bisa diabaikan publik umum. Ia menciptakan rantai dampak yang pada akhirnya menyentuh kehidupan nyata masyarakat melalui beberapa jalur transmisi berikut:</p>
+
+    <div class="chain">
+      <div class="chain-row">
+        <div class="chain-box cause"><strong>Sentimen Negatif Akumulasi</strong><br><span class="chain-sub">MSCI, Fitch rating, fiskal, kebijakan, konflik Timur Tengah</span></div>
+      </div>
+      <div class="chain-arrow" style="padding-left:2.5rem">↓</div>
+      <div class="chain-row">
+        <div class="chain-box effect"><strong>Foreign Outflow Masif</strong><br><span class="chain-sub">Net sell Rp 61,8 T (saham) + Rp 15,4 T (SBN) YtD 2026</span></div>
+      </div>
+      <div class="chain-arrow" style="padding-left:2.5rem">↓</div>
+      <div class="chain-row">
+        <div class="chain-box effect"><strong>Rupiah Runtuh ke Rp 18.200/USD</strong><br><span class="chain-sub">Terlemah sepanjang sejarah RI</span></div>
+      </div>
+      <div class="chain-arrow" style="padding-left:2.5rem">↓</div>
+      <div class="chain-row">
+        <div class="chain-box warning"><strong>Subsidi BBM &amp; Energi Meledak</strong><br><span class="chain-sub">+266,5% YoY → Rp 118,7 triliun</span></div>
+        <div class="chain-arrow">+</div>
+        <div class="chain-box warning"><strong>Yield SUN Naik</strong><br><span class="chain-sub">Biaya utang pemerintah & korporasi naik 200–300 bps</span></div>
+      </div>
+      <div class="chain-arrow" style="padding-left:2.5rem">↓</div>
+      <div class="chain-row">
+        <div class="chain-box effect"><strong>Earnings Emiten Tertekan</strong><br><span class="chain-sub">Laba konsumsi & properti diperkirakan turun 15–25%</span></div>
+      </div>
+      <div class="chain-arrow" style="padding-left:2.5rem">↓</div>
+      <div class="chain-row">
+        <div class="chain-box cause"><strong>IHSG Terus Tertekan → Siklus Negatif Berlanjut</strong><br><span class="chain-sub">Kepercayaan semakin sulit dipulihkan</span></div>
+      </div>
+    </div>
+
+    <table class="impact-table">
+      <thead>
+        <tr>
+          <th>Sektor</th>
+          <th>Dampak Spesifik</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Perbankan</strong></td>
+          <td>BBCA: net sell Rp 26,8 T; harga saham turun 24,15% ke Rp 6.125. BBRI dan BMRI turut tertekan.</td>
+          <td><span class="badge-neg">Tekanan berat</span></td>
+        </tr>
+        <tr>
+          <td><strong>Komoditas & Tambang</strong></td>
+          <td>Kebijakan ekspor satu pintu via Danantara menciptakan ketidakpastian rantai pasok dan margin eksportir swasta.</td>
+          <td><span class="badge-neg">Ketidakpastian</span></td>
+        </tr>
+        <tr>
+          <td><strong>Konsumsi Domestik</strong></td>
+          <td>Rupiah lemah → inflasi impor → daya beli masyarakat tertekan. Kelas menengah menyusut 24% sejak 2018.</td>
+          <td><span class="badge-neg">Memburuk</span></td>
+        </tr>
+        <tr>
+          <td><strong>Obligasi Pemerintah (SBN)</strong></td>
+          <td>Investor asing kurangi kepemilikan ~9% sejak Agustus 2025. SBN merugi >8% bagi investor berbasis dolar.</td>
+          <td><span class="badge-neg">Tekanan berat</span></td>
+        </tr>
+        <tr>
+          <td><strong>Nilai Tukar (Rupiah)</strong></td>
+          <td>Menembus Rp 18.200/USD — rekor sepanjang sejarah. BI intervensi dengan naikkan bunga dua kali dalam 3 minggu.</td>
+          <td><span class="badge-neg">Krisis</span></td>
+        </tr>
+        <tr>
+          <td><strong>Investor Ritel Domestik</strong></td>
+          <td>Jumlah investor pasar modal naik 36,27% YoY ke 27,75 juta (Mei 2026). Mereka dominasi volume 79,94% — menjadi penyangga likuiditas saat asing pergi.</td>
+          <td><span class="badge-neu">Penopang</span></td>
+        </tr>
+        <tr>
+          <td><strong>Fiskal Pemerintah</strong></td>
+          <td>Fitch proyeksikan defisit 2,9% PDB 2026, lebih besar dari target 2,7%. Risiko fiskal semakin diawasi ketat.</td>
+          <td><span class="badge-neg">Di bawah sorotan</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SECTION 5: RESPONS PEMERINTAH -->
+  <section class="section">
+    <span class="section-label">Bagian V</span>
+    <h2>Respons Pemerintah & Regulator</h2>
+    <p>Menghadapi gelombang "Sell Indonesia", pemerintah dan regulator telah mengambil serangkaian langkah — dengan tingkat efektivitas yang masih diperdebatkan pasar.</p>
+
+    <div class="two-col">
+      <div>
+        <p style="font-weight:600; margin-bottom:.5rem;">Langkah Moneter (Bank Indonesia)</p>
+        <ul style="padding-left:1.25rem; font-size:.9rem; color:#2a2a2a;">
+          <li style="margin-bottom:.4rem;">Naikan BI Rate 50 bps ke 5,25% (19–20 Mei 2026)</li>
+          <li style="margin-bottom:.4rem;">Naikan BI Rate lagi 25 bps ke 5,50% (9 Juni 2026)</li>
+          <li style="margin-bottom:.4rem;">Intervensi di pasar spot dan non-deliverable forward (NDF)</li>
+          <li>Memperpanjang ketentuan devisa hasil ekspor (DHE) wajib parkir di dalam negeri</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:600; margin-bottom:.5rem;">Reformasi Pasar Modal (OJK, BEI, KSEI)</p>
+        <ul style="padding-left:1.25rem; font-size:.9rem; color:#2a2a2a;">
+          <li style="margin-bottom:.4rem;">Minimum free float naik dari 7,5% ke 15% (berlaku 31 Maret 2026)</li>
+          <li style="margin-bottom:.4rem;">39 klasifikasi investor baru untuk transparansi kepemilikan</li>
+          <li style="margin-bottom:.4rem;">Diskusi aktif dengan MSCI — Indonesia dikonfirmasi tetap di emerging market (4 Juni 2026)</li>
+          <li>Pejabat BEI mengundurkan diri sebagai bentuk pertanggungjawaban atas krisis transparansi</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pullquote">
+      <p>"Saya percepat APBN KiTA agar pasar melihat bahwa kondisi fiskal kita baik dan ekonominya cukup kuat, sehingga lama-lama sentimen negatif bisa hilang."</p>
+      <cite>— Purbaya Yudhi Sadewa, Menteri Keuangan RI (6 Juni 2026)</cite>
+    </div>
+
+    <p>
+      Menkeu Purbaya juga meminta pasar tidak "menelan mentah-mentah" narasi Sell Indonesia, dengan menekankan bahwa laporan Bloomberg tidak sepenuhnya merepresentasikan kondisi fundamental ekonomi Indonesia. Namun, pernyataan ini justru menunjukkan tantangan komunikasi kebijakan yang lebih dalam: gap antara pesan pemerintah dan persepsi investor global.
+    </p>
+    <p>
+      Presiden Prabowo sendiri menyatakan dalam wawancara Bloomberg: <em>"Pasar tidak memahami saya. Saya hanya melakukan apa yang menurut saya terbaik untuk kepentingan rakyat saya."</em> Pernyataan ini — meski jujur secara personal — justru diinterpretasikan pasar sebagai konfirmasi bahwa kebijakan tidak akan berubah ke arah yang lebih market-friendly.
+    </p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SECTION 6: ANCAMAN FRONTIER MARKET -->
+  <section class="section">
+    <span class="section-label">Bagian VI</span>
+    <h2>Skenario Paling Ditakuti: Downgrade ke Frontier Market</h2>
+    <p>
+      Ancaman terbesar yang membayangi pasar modal Indonesia saat ini adalah kemungkinan MSCI menurunkan status Indonesia dari <strong>Emerging Market</strong> ke <strong>Frontier Market</strong> pada review Juni 2026. Ini bukan sekadar masalah simbolis — dampaknya konkret dan massif.
+    </p>
+    <p>
+      Saat ini Indonesia masih memiliki 11 saham di MSCI Global Standard (batas minimum emerging market adalah 3 saham). Masalah Indonesia berbeda dari Pakistan yang di-downgrade pada 2021 karena tidak ada saham yang memenuhi syarat size & likuiditas — Indonesia bermasalah pada metodologi free float, bukan kuantitas saham eligible.
+    </p>
+    <p>
+      Jika downgrade terjadi, yang paling ditakuti adalah <strong>forced selling</strong> dari fund manajer pasif yang mengikuti MSCI Emerging Markets Index. Estimasi arus modal keluar akibat downgrade berkisar antara <mark>USD 2,2 miliar hingga USD 50 miliar</mark> — angka yang jauh lebih besar dari outflow yang sudah terjadi sepanjang 2026.
+    </p>
+    <p>
+      BEI (4 Juni 2026) mengonfirmasi bahwa berdasarkan diskusi langsung dengan MSCI, <strong>Indonesia akan tetap dipertahankan di emerging market</strong>, dan informasi yang beredar soal downgrade adalah tidak akurat. Namun, review MSCI pada 24 Juni 2026 tetap menjadi momen paling kritis tahun ini bagi pasar modal Indonesia.
+    </p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SECTION 7: OUTLOOK -->
+  <section class="section">
+    <span class="section-label">Bagian VII</span>
+    <h2>Outlook: Bullish Case vs. Bear Case</h2>
+
+    <div class="outlook-grid">
+      <div class="outlook-box bull">
+        <div class="outlook-header bull">▲ Argumen Bullish</div>
+        <div class="outlook-item">Pertumbuhan ekonomi masih di kisaran 5% (IMF, Bank Dunia) — fundamental makro belum runtuh</div>
+        <div class="outlook-item">Utang pemerintah relatif rendah dibanding peer emerging market</div>
+        <div class="outlook-item">Indonesia adalah produsen nikel terbesar dunia — posisi kunci dalam rantai pasok baterai global</div>
+        <div class="outlook-item">Investor domestik bertumbuh 36,27% YoY ke 27,75 juta — menopang likuiditas saat asing pergi</div>
+        <div class="outlook-item">Reformasi transparansi BEI berjalan; MSCI konfirmasi Indonesia tetap di emerging market</div>
+        <div class="outlook-item">Valuasi saham semakin murah — potensi value play bagi investor jangka panjang</div>
+        <div class="outlook-item">Bank Dunia proyeksikan pertumbuhan bisa mencapai 5,5% jika reformasi struktural berjalan</div>
+      </div>
+      <div class="outlook-box bear">
+        <div class="outlook-header bear">▼ Argumen Bearish</div>
+        <div class="outlook-item">Rupiah sudah di level historis terendah; risiko inflasi impor dan erosi daya beli meningkat</div>
+        <div class="outlook-item">BI Rate dua kali naik dalam 3 minggu — rem pertumbuhan kredit korporat dan konsumen</div>
+        <div class="outlook-item">Review MSCI 24 Juni tetap mengandung tail risk; pasar belum sepenuhnya pulih dari ketidakpastian</div>
+        <div class="outlook-item">Kebijakan Danantara ekspor satu pintu belum terbukti efektif; implementasi masih penuh tanda tanya</div>
+        <div class="outlook-item">Kelas menengah menyusut drastis — motor konsumsi domestik melemah struktural</div>
+        <div class="outlook-item">Kepemilikan BI atas SBN sudah ~27% — tanda kekhawatiran soal monetary financing</div>
+        <div class="outlook-item">Jika rupiah tembus Rp 19.000, IHSG bisa ambrol ke level 4.000 (skenario terburuk)</div>
+      </div>
+    </div>
+
+    <p>
+      Mayoritas analis saat ini menilai bahwa kunci pemulihan bukan pada data ekonomi — yang masih relatif solid — melainkan pada <strong>pemulihan kepercayaan</strong>. Kepercayaan dibangun melalui tiga hal: prediktabilitas kebijakan, independensi bank sentral, dan transparansi tata kelola — bukan melalui pernyataan bahwa fundamental baik-baik saja.
+    </p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- SECTION 8: PERSPEKTIF KRITIS -->
+  <section class="section">
+    <span class="section-label">Bagian VIII</span>
+    <h2>Perspektif Kritis: Apa yang Perlu Diluruskan</h2>
+
+    <div class="two-col">
+      <div>
+        <p style="font-weight:600; margin-bottom:.6rem; font-family:'Playfair Display', serif;">Narasi yang Berlebihan</p>
+        <p style="font-size:.88rem;">Sebagian analis menilai narasi "Sell Indonesia" di media internasional tidak sepenuhnya proporsional. Pertumbuhan 5%, utang rendah, dan populasi 280 juta dengan bonus demografi masih menjadi magnet jangka panjang. Ana Isabel Gonzalez (Farringdon) yang menjual saham Indonesia mengakui bahwa "banyak investor masih percaya pada prospek jangka panjang Indonesia."</p>
+      </div>
+      <div>
+        <p style="font-weight:600; margin-bottom:.6rem; font-family:'Playfair Display', serif;">Yang Tidak Boleh Diabaikan</p>
+        <p style="font-size:.88rem;">Di sisi lain, meremehkan sinyal pasar dengan alasan "investor tidak memahami kita" adalah respons yang berbahaya. Pasar modal modern bekerja berdasarkan ekspektasi dan kepercayaan, bukan hanya data historis. Ketika investor kehilangan kepercayaan pada prediktabilitas aturan main, mereka bertindak mendahului pembuktian — dan keluarnya modal itu sendiri menciptakan kerugian nyata.</p>
+      </div>
+    </div>
+
+    <div class="pullquote">
+      <p>"Pemerintah butuh mitra para pemegang obligasi. Sampai itu tercapai, strategi 'jual Indonesia' tetap berlaku."</p>
+      <cite>— Nick Boubouras, analis pasar obligasi</cite>
+    </div>
+
+    <p>
+      Indonesia menghadapi dilema klasik emerging market: kebijakan yang populis di dalam negeri sering kali diterjemahkan sebagai sinyal negatif oleh pasar global. Mencari titik seimbang antara kedua imperatif ini — memenuhi janji kepada rakyat sekaligus menjaga kepercayaan investor — adalah tantangan governance yang tidak bisa diselesaikan hanya dengan narasi balik-balik di media.
+    </p>
+    <p>
+      Yang dibutuhkan adalah <strong>konsistensi tindakan</strong>: reformasi transparansi yang tuntas, komunikasi kebijakan yang jelas sebelum kebijakan diterapkan, dan sinyal bahwa independensi BI tidak akan dikompromikan. Tanpa itu, gap antara fundamental dan persepsi akan terus melebar.
+    </p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- KESIMPULAN -->
+  <section class="section">
+    <span class="section-label">Kesimpulan</span>
+    <h2>Satu Pertanyaan yang Menentukan Segalanya</h2>
+    <p>
+      Pada intinya, fenomena "Sell Indonesia" adalah ujian bagi satu pertanyaan sederhana yang ditanyakan setiap investor sebelum menempatkan modal: <em>Dapatkah saya mempercayai aturan main di sini?</em>
+    </p>
+    <p>
+      Jawaban atas pertanyaan itu tidak bisa diberikan melalui data PDB, pidato presiden, atau siaran pers Kementerian Keuangan saja. Ia hanya bisa dijawab melalui <strong>aksi kebijakan yang konsisten, transparan, dan dapat diprediksi</strong> — yang berlangsung bukan dalam hitungan minggu, melainkan berbulan-bulan.
+    </p>
+    <p>
+      Indonesia memiliki modal yang cukup untuk melewati krisis ini: ekonomi yang masih tumbuh, populasi muda, sumber daya alam melimpah, dan basis investor domestik yang semakin dalam. Namun modal itu hanya akan bekerja jika dikelola dengan narasi kebijakan yang koheren — bukan narasi tandingan yang reaktif terhadap setiap berita negatif dari Bloomberg.
+    </p>
+    <p>
+      Review MSCI pada 24 Juni 2026 adalah garis finish jangka pendek. Pemulihan kepercayaan yang sesungguhnya adalah maraton yang baru dimulai.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <div>
+    <strong>Sumber Data Utama:</strong> Bloomberg, Kompas.id, ANTARA News, Investor.id, Detik Finance, Bisnis.com, OJK, BEI, Bank Indonesia, IMF, Fitch Ratings, MSCI, Samuel Sekuritas, Kiwoom Sekuritas.
+  </div>
+  <div style="text-align:right; color: var(--mid);">
+    Disusun: 11 Juni 2026 &nbsp;·&nbsp; Data per 8–9 Juni 2026
+  </div>
+</footer>
+
+</body>
+</html>
